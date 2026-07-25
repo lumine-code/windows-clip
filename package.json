@@ -61,7 +61,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-n": "^18.2.2",
     "globals": "^17.7.0",
-    "node-gyp": "^11.4.3",
+    "node-gyp": "^13.0.1",
     "prettier": "^3.9.6"
   }
 }
