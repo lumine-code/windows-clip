@@ -1,7 +1,7 @@
 {
   "name": "windows-clip",
   "author": "lumine-code",
-  "description": "Native Windows clipboard operations for tree-view files and folders",
+  "description": "Native Windows clipboard operations in the tree view.",
   "repository": "https://github.com/lumine-code/windows-clip",
   "bugs": {
     "url": "https://github.com/lumine-code/windows-clip/issues"

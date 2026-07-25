@@ -1,6 +1,6 @@
 # windows-clip
 
-Native Windows clipboard operations for tree-view files and folders.
+Native Windows clipboard operations in the tree view.
 
 ## Features
 
