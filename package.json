@@ -7,13 +7,12 @@
     "url": "https://github.com/lumine-code/windows-clip/issues"
   },
   "keywords": [
-    "windows",
     "clipboard",
     "native",
     "copy",
     "paste",
     "cut",
-    "move"
+    "explorer"
   ],
   "activationCommands": {
     ".platform-win32 .tree-view": [
