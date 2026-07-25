@@ -1,5 +1,0 @@
-'.platform-win32 .tree-view':
-  'shift-x': 'windows-clip:cut'
-  'shift-c': 'windows-clip:copy'
-  'shift-v': 'windows-clip:paste'
-  'shift-b': 'windows-clip:force'

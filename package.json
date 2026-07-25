@@ -1,7 +1,11 @@
 {
   "name": "windows-clip",
+  "author": "lumine-code",
   "description": "Native Windows clipboard operations for tree-view files and folders",
-  "repository": "https://github.com/asiloisad/pulsar-windows-clip",
+  "repository": "https://github.com/lumine-code/windows-clip",
+  "bugs": {
+    "url": "https://github.com/lumine-code/windows-clip/issues"
+  },
   "keywords": [
     "windows",
     "clipboard",
@@ -19,13 +23,17 @@
       "windows-clip:force"
     ]
   },
-  "version": "3.2.3",
+  "version": "4.0.0",
   "license": "MIT",
   "engines": {
     "atom": ">=1.100.0 <2.0.0"
   },
   "main": "./lib/main",
   "scripts": {
+    "test": "cd ../lumine && npm run test:only -- ../windows-clip/spec",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean"
   },
@@ -44,8 +52,16 @@
     }
   },
   "dependencies": {
-    "fs-extra": "^11.2.0",
-    "node-addon-api": "^8.3.0",
+    "node-addon-api": "^8.5.0",
     "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.2.2",
+    "globals": "^17.7.0",
+    "node-gyp": "^11.4.3",
+    "prettier": "^3.9.6"
   }
 }

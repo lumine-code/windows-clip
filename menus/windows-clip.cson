@@ -1,8 +1,0 @@
-'context-menu':
-  '.platform-win32 .tree-view': [
-    {'type': 'separator'}
-    { label: 'WinCut', command: 'windows-clip:cut' },
-    { label: 'WinCopy', command: 'windows-clip:copy' },
-    { label: 'WinPaste', command: 'windows-clip:paste' },
-    {'type': 'separator'}
-  ]

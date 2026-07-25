@@ -2,19 +2,17 @@
 
 Native Windows clipboard operations for tree-view files and folders.
 
-![context-menu](https://github.com/asiloisad/pulsar-windows-clip/blob/master/assets/context-menu.png?raw=true)
-
 ## Features
 
-- **Native clipboard**: Uses Windows clipboard API directly for cross-application compatibility.
-- **Cut/Copy/Paste**: Full clipboard operations with Explorer interoperability.
-- **Smart duplicates**: Uses Windows naming format `<name> - Copy (n)<ext>`.
-- **Force paste**: Option to overwrite existing files.
-- **Service**: Provides clipboard access for other packages.
+- **Native clipboard**: uses the Windows clipboard API directly for cross-application compatibility.
+- **Cut/Copy/Paste**: full clipboard operations with Explorer interoperability.
+- **Smart duplicates**: uses the Windows naming format `<name> - Copy (n)<ext>`.
+- **Force paste**: option to overwrite existing files.
+- **Service**: provides clipboard access for other packages.
 
 ## Installation
 
-To install `windows-clip` search for [windows-clip](https://web.pulsar-edit.dev/packages/windows-clip) in the Install pane of the Pulsar settings or run `ppm install windows-clip`. Alternatively, you can run `ppm install asiloisad/pulsar-windows-clip` to install a package directly from the GitHub repository.
+To install `windows-clip` search for _windows-clip_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/windows-clip`.
 
 ## Commands
 
@@ -25,49 +23,14 @@ Commands available in `.platform-win32 .tree-view`:
 - `windows-clip:paste`: paste from clipboard (auto-rename if exists),
 - `windows-clip:force`: paste from clipboard (overwrite if exists).
 
-## Provided Service `windows-clip`
+## Services
 
-Provides native Windows clipboard access for file operations. Other packages can read/write file paths and drop effects directly from the Windows clipboard.
+- **windows-clip** (`1.0.0`): provided to expose native Windows clipboard access — `readFilePaths()`, `readDropEffect()`, `writeFilePaths(paths, dropEffect)`, `clear()`, and the `DROP_EFFECT_*` constants.
+- **tree-view** (`^1.0.0`): consumed to read the selected files and folders for clipboard operations.
 
-In your `package.json`:
+## Usage
 
-```json
-{
-  "consumedServices": {
-    "windows-clip": {
-      "versions": {
-        "1.0.0": "consumeWindowsClip"
-      }
-    }
-  }
-}
-```
-
-In your main module:
-
-```javascript
-module.exports = {
-  consumeWindowsClip(windowsClip) {
-    // Constants for drop effect
-    windowsClip.DROP_EFFECT_NONE  // 0
-    windowsClip.DROP_EFFECT_COPY  // 1
-    windowsClip.DROP_EFFECT_MOVE  // 2
-    windowsClip.DROP_EFFECT_LINK  // 4
-
-    // Read file paths from Windows clipboard
-    const paths = windowsClip.readFilePaths()
-
-    // Read the drop effect (copy/move/link)
-    const effect = windowsClip.readDropEffect()
-
-    // Write file paths to clipboard with drop effect
-    windowsClip.writeFilePaths(['/path/to/file'], windowsClip.DROP_EFFECT_COPY)
-
-    // Clear the clipboard
-    windowsClip.clear()
-  }
-}
-```
+The package registers its commands only on Windows (`.platform-win32`). A consuming package reads and writes the same `CF_HDROP` clipboard data as Windows Explorer, so cut/copied files interoperate with Explorer in both directions.
 
 ## Contributing
 
