@@ -25,8 +25,8 @@ Commands available in `.platform-win32 .tree-view`:
 
 ## Services
 
-- **windows-clip** (`1.0.0`): provided to expose native Windows clipboard access — `readFilePaths()`, `readDropEffect()`, `writeFilePaths(paths, dropEffect)`, `clear()`, and the `DROP_EFFECT_*` constants.
-- **tree-view.selection** (`^1.0.0`): consumed to read the selected files and folders for clipboard operations.
+- **[windows-clip](docs/windows-clip.md)** (`1.0.0`): provided to expose native Windows clipboard access — `readFilePaths()`, `readDropEffect()`, `writeFilePaths(paths, dropEffect)`, `clear()`, and the `DROP_EFFECT_*` constants.
+- **[tree-view.selection](https://lumine-code.github.io/docs.html#services/tree-view.selection)** (`^1.0.0`): consumed to read the selected files and folders for clipboard operations.
 
 ## Usage
 
