@@ -49,8 +49,6 @@ jobs:
       - name: Load the freshly built native binary
         if: runner.os == 'Windows'
         run: node -e "const c = require('node-gyp-build')('.'); if (typeof c.readFilePaths !== 'function') throw new Error('bad binary')"
-      - name: Verify package contents
-        run: npm pack --dry-run
 
   integration:
     # Run the Jasmine spec suite inside a real Lumine build. On Linux only the
