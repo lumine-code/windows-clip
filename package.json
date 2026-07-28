@@ -27,6 +27,9 @@
   "engines": {
     "atom": ">=1.100.0 <2.0.0"
   },
+  "backgroundTips": [
+    "{% if platform == 'win32' %}You can copy files selected in the tree view to the Windows clipboard with {{ 'windows-clip:copy' | keystroke }}{% endif %}"
+  ],
   "main": "./lib/main",
   "scripts": {
     "test": "lumine --test spec",
