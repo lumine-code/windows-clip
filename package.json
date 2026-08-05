@@ -31,6 +31,16 @@
     "{% if platform == 'win32' %}You can copy files selected in the tree view to the Windows clipboard with {{ 'windows-clip:copy' | keystroke }}{% endif %}"
   ],
   "main": "./lib/main",
+  "files": [
+    "binding.gyp",
+    "build",
+    "docs",
+    "keymaps",
+    "lib",
+    "menus",
+    "spec",
+    "src"
+  ],
   "scripts": {
     "test": "lumine --test spec",
     "lint": "eslint . --max-warnings 0",
