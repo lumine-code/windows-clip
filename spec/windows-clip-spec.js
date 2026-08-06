@@ -25,7 +25,9 @@ describe("windows-clip", () => {
     });
 
     afterEach(() => {
-      fs.rmSync(dir, { recursive: true, force: true });
+      // Retries because Windows keeps a directory non-empty until the last handle on a
+      // child closes, and `force` swallows only ENOENT.
+      fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 50 });
     });
 
     it("returns the path unchanged when nothing exists", async () => {
@@ -65,7 +67,7 @@ describe("windows-clip", () => {
 
     afterEach(() => {
       mainModule.treeView = null;
-      fs.rmSync(dir, { recursive: true, force: true });
+      fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 50 });
     });
 
     it("copies clipboard files into the selected directory", async () => {
@@ -126,7 +128,7 @@ describe("windows-clip", () => {
 
       afterEach(() => {
         mainModule.clearClipboard();
-        fs.rmSync(dir, { recursive: true, force: true });
+        fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 50 });
       });
 
       it("round-trips file paths and the drop effect", () => {
