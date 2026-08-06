@@ -64,7 +64,7 @@
     }
   },
   "dependencies": {
-    "node-addon-api": "^8.5.0",
+    "node-addon-api": "^8.9.1",
     "node-gyp-build": "^4.8.4"
   },
   "devDependencies": {
@@ -72,7 +72,7 @@
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-n": "^18.2.2",
-    "globals": "^17.7.0",
+    "globals": "^17.9.0",
     "node-gyp": "^13.0.1",
     "prettier": "^3.9.6"
   }
