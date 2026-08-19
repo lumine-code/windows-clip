@@ -1,20 +1,25 @@
 {
   "context-menu": {
-    ".platform-win32 .tree-view .entry": [
+    ".tree-view .entry": [
       {
         "type": "separator"
       },
       {
-        "label": "WinCut",
-        "command": "windows-clip:cut"
-      },
-      {
-        "label": "WinCopy",
-        "command": "windows-clip:copy"
-      },
-      {
-        "label": "WinPaste",
-        "command": "windows-clip:paste"
+        "label": "System Clipboard",
+        "submenu": [
+          {
+            "label": "Cut",
+            "command": "native-clip:cut"
+          },
+          {
+            "label": "Copy",
+            "command": "native-clip:copy"
+          },
+          {
+            "label": "Paste",
+            "command": "native-clip:paste"
+          }
+        ]
       },
       {
         "type": "separator"

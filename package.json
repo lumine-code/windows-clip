@@ -1,25 +1,25 @@
 {
-  "name": "windows-clip",
+  "name": "native-clip",
   "author": "lumine-code",
-  "description": "Native Windows clipboard operations in the tree view.",
-  "repository": "https://github.com/lumine-code/windows-clip",
+  "description": "Cut, copy and paste files between the tree view and the system clipboard.",
+  "repository": "https://github.com/lumine-code/native-clip",
   "bugs": {
-    "url": "https://github.com/lumine-code/windows-clip/issues"
+    "url": "https://github.com/lumine-code/native-clip/issues"
   },
   "keywords": [
     "clipboard",
-    "native",
     "copy",
     "paste",
     "cut",
-    "explorer"
+    "explorer",
+    "finder",
+    "nautilus"
   ],
   "activationCommands": {
-    ".platform-win32 .tree-view": [
-      "windows-clip:cut",
-      "windows-clip:copy",
-      "windows-clip:paste",
-      "windows-clip:force"
+    ".tree-view": [
+      "native-clip:cut",
+      "native-clip:copy",
+      "native-clip:paste"
     ]
   },
   "version": "1.0.0",
@@ -28,44 +28,43 @@
     "lumine": "^1.0.0"
   },
   "backgroundTips": [
-    "{% if platform == 'win32' %}You can copy files selected in the tree view to the Windows clipboard with {{ 'windows-clip:copy' | keystroke }}{% endif %}"
+    "You can copy files selected in the tree view to the system clipboard with {{ 'native-clip:copy' | keystroke }}"
   ],
   "main": "./lib/main",
   "files": [
-    "binding.gyp",
-    "build",
     "docs",
     "keymaps",
     "lib",
     "menus",
-    "spec",
-    "src"
+    "spec"
   ],
   "scripts": {
     "test": "lumine --test spec",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "build": "node-gyp rebuild",
-    "clean": "node-gyp clean"
+    "format:check": "prettier --check ."
   },
   "consumedServices": {
     "tree-view.selection": {
       "versions": {
         "^1.0.0": "consumeTreeViewSelection"
       }
+    },
+    "busy-signal": {
+      "versions": {
+        "^1.0.0": "consumeBusySignal"
+      }
     }
   },
   "providedServices": {
-    "windows-clip": {
+    "native-clip": {
       "versions": {
-        "1.0.0": "provideWindowsClip"
+        "1.0.0": "provideNativeClip"
       }
     }
   },
   "dependencies": {
-    "node-addon-api": "^8.9.2",
-    "node-gyp-build": "^4.8.4"
+    "@lumine-code/clipboard-files": "github:lumine-code/clipboard-files#51345cede13bca767a16354812f804e0662aeb89"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -73,7 +72,9 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-n": "^18.3.0",
     "globals": "^17.11.0",
-    "node-gyp": "^13.0.1",
     "prettier": "^3.9.6"
+  },
+  "allowScripts": {
+    "github:lumine-code/clipboard-files#51345cede13bca767a16354812f804e0662aeb89": true
   }
 }

@@ -1,36 +1,36 @@
-# windows-clip
+# native-clip
 
-Native Windows clipboard operations in the tree view.
+Cut, copy and paste files between the tree view and the system clipboard.
 
 ## Features
 
-- **Native clipboard**: uses the Windows clipboard API directly for cross-application compatibility.
-- **Cut/Copy/Paste**: full clipboard operations with Explorer interoperability.
-- **Smart duplicates**: uses the Windows naming format `<name> - Copy (n)<ext>`.
-- **Force paste**: option to overwrite existing files.
-- **Service**: provides clipboard access for other packages.
+- **System clipboard**: file paths travel on the real clipboard, so cut and copied files interoperate with Explorer, Finder, Nautilus and Dolphin in both directions.
+- **Cut/Copy/Paste**: full clipboard operations from the tree view, with the cut/copy distinction each platform expresses.
+- **Conflict prompts**: pasting over an existing entry asks — Replace, Keep Both or Skip, with All variants when several entries collide.
+- **Busy signal**: long pastes report progress on the status bar's busy indicator.
+- **Service**: provides the clipboard primitives and the shared cut/copy/paste operations to other packages.
 
 ## Installation
 
-To install `windows-clip` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/windows-clip`.
+To install `native-clip` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/native-clip`.
 
 ## Commands
 
-Commands available in `.platform-win32 .tree-view`:
+Commands available in `.tree-view`:
 
-- `windows-clip:cut`: cut selected files/folders to clipboard,
-- `windows-clip:copy`: copy selected files/folders to clipboard,
-- `windows-clip:paste`: paste from clipboard (auto-rename if exists),
-- `windows-clip:force`: paste from clipboard (overwrite if exists).
+- `native-clip:cut`: cut selected files/folders to the system clipboard,
+- `native-clip:copy`: copy selected files/folders to the system clipboard,
+- `native-clip:paste`: paste from the system clipboard into the selected folder.
 
 ## Services
 
-- [`windows-clip`](docs/windows-clip.md): provided to expose native Windows clipboard access — `readFilePaths()`, `readDropEffect()`, `writeFilePaths(paths, dropEffect)`, `clear()`, and the `DROP_EFFECT_*` constants.
+- [`native-clip`](docs/native-clip.md): provided to expose system clipboard access for file paths — the raw primitives plus the shared `cutPaths()`, `copyPaths()` and `pasteInto()` operations.
 - `tree-view.selection`: consumed to read the selected files and folders for clipboard operations.
+- `busy-signal`: consumed to report paste progress on the status bar.
 
 ## Usage
 
-The package registers its commands only on Windows (`.platform-win32`). A consuming package reads and writes the same `CF_HDROP` clipboard data as Windows Explorer, so cut/copied files interoperate with Explorer in both directions.
+Cut or copied files land on the platform clipboard in its native file format, so they paste into the system file manager and files cut or copied there paste into the tree view. On macOS the pasteboard has no cut marker of its own — Finder decides move-versus-copy at paste time (⌘V copies, ⌘⌥V moves), and a cut made here still moves when pasted back inside the editor. Pasting an entry over an existing one asks what to do; pasting an entry into its own folder duplicates it under a `<name> - Copy (n)` name.
 
 ## Contributing
 

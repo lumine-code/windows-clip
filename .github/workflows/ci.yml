@@ -40,20 +40,11 @@ jobs:
         run: npm run lint
       - name: Check formatting
         run: npm run format:check
-      - name: Load the committed native binary
-        if: runner.os == 'Windows'
-        run: node -e "const c = require('node-gyp-build')('.'); if (typeof c.readFilePaths !== 'function') throw new Error('bad binary')"
-      - name: Build the native module from source
-        if: runner.os == 'Windows'
-        run: npm run build
-      - name: Load the freshly built native binary
-        if: runner.os == 'Windows'
-        run: node -e "const c = require('node-gyp-build')('.'); if (typeof c.readFilePaths !== 'function') throw new Error('bad binary')"
 
   integration:
-    # Run the Jasmine spec suite inside a real Lumine build. On Linux only the
-    # platform-independent paste/naming logic runs; the native clipboard specs
-    # are Windows-gated.
+    # Run the Jasmine spec suite inside a real Lumine build. The engine specs
+    # run everywhere on spies; the round-trip spec talks to the real clipboard
+    # through Electron's, which xvfb provides a display for.
     name: Lumine integration specs
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -62,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          path: windows-clip
+          path: native-clip
       - uses: actions/checkout@v6
         with:
           repository: lumine-code/lumine
@@ -84,7 +75,7 @@ jobs:
       - name: Use HTTPS for GitHub git dependencies
         run: git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
       - name: Install package dependencies
-        working-directory: windows-clip
+        working-directory: native-clip
         run: npm ci --ignore-scripts
       - name: Install editor dependencies
         working-directory: lumine
@@ -100,4 +91,4 @@ jobs:
       - name: Run the Jasmine spec suite
         working-directory: lumine
         timeout-minutes: 20
-        run: xvfb-run --auto-servernum npm start -- --test ../windows-clip/spec
+        run: xvfb-run --auto-servernum npm start -- --test ../native-clip/spec
