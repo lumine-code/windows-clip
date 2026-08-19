@@ -201,9 +201,14 @@ describe("native-clip", () => {
     });
   });
 
-  describe("clipboard round-trip", () => {
-    // Runs against the real clipboard through @lumine-code/clipboard-files:
-    // natively on Windows and macOS, through Electron's clipboard on Linux.
+  // Runs against the real clipboard through @lumine-code/clipboard-files on
+  // the natively backed platforms. On Linux the backend is Electron's
+  // clipboard, whose selection reads do not answer in a hidden CI window —
+  // the library's own CI covers the Linux formats through a real xclip
+  // round-trip instead.
+  const roundTripSuite = process.platform === "linux" ? xdescribe : describe;
+
+  roundTripSuite("clipboard round-trip", () => {
     let dir;
 
     beforeEach(() => {
