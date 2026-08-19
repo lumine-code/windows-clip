@@ -5,21 +5,16 @@
         "type": "separator"
       },
       {
-        "label": "System Clipboard",
-        "submenu": [
-          {
-            "label": "Cut",
-            "command": "native-clip:cut"
-          },
-          {
-            "label": "Copy",
-            "command": "native-clip:copy"
-          },
-          {
-            "label": "Paste",
-            "command": "native-clip:paste"
-          }
-        ]
+        "label": "Cut (System)",
+        "command": "native-clip:cut"
+      },
+      {
+        "label": "Copy (System)",
+        "command": "native-clip:copy"
+      },
+      {
+        "label": "Paste (System)",
+        "command": "native-clip:paste"
       },
       {
         "type": "separator"
